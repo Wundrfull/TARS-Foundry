@@ -1,0 +1,13 @@
+{
+  "appName": "agent-gallery",
+  "displayName": "TARS-Foundry Agent Gallery",
+  "description": "Curated collection of Claude sub-agent prompt templates",
+  "visibility": "listed",
+  "runtime": "static",
+  "assetsDir": "dist",
+  "buildCommand": "npm run build",
+  "author": "TARS-Foundry",
+  "repository": "https://github.com/TARS-Foundry/agent-gallery",
+  "keywords": ["claude", "ai", "agents", "prompts", "templates"],
+  "category": "developer-tools"
+}

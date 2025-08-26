@@ -1,0 +1,66 @@
+# Dependencies
+node_modules/
+agent-gallery/node_modules/
+agent-gallery/agent-gallery/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Build output
+dist/
+dist-ssr/
+build/
+out/
+*.local
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE and editor files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+*.lcov
+.nyc_output/
+
+# TypeScript
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Logs
+logs/
+*.log
+
+# Package manager locks (keep one based on your preference)
+# Uncomment the ones you don't want to track
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Claude-specific (already tracked, but included for reference)
+# .claude/
+# CLAUDE.md
