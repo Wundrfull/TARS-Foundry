@@ -285,13 +285,29 @@ tools: [${agent.tools.join(', ')}]
                     </svg>
                   </summary>
                   <div className="px-6 pb-6 pt-2 border-t border-gray-200">
-                    <p className="text-gray-700 mb-4">To use this agent in Claude Code:</p>
-                    <ol className="list-decimal list-inside space-y-2 text-sm text-gray-600">
-                      <li>Copy the full prompt using the button above</li>
-                      <li>Save it as a <code className="text-xs bg-gray-200 px-2 py-1 rounded font-mono">.md</code> file in your project</li>
-                      <li>Invoke the agent using Claude Code's agent system</li>
-                      <li>Ensure the required tools are enabled in your environment</li>
+                    <p className="text-gray-700 mb-4">To use this agent with Claude Code:</p>
+                    <ol className="list-decimal list-inside space-y-3 text-sm text-gray-600">
+                      <li className="leading-relaxed">
+                        <strong>Start Claude Code</strong> and run <code className="text-xs bg-gray-200 px-2 py-1 rounded font-mono">/agents</code> to open the subagent manager
+                      </li>
+                      <li className="leading-relaxed">
+                        <strong>Select "Create New Agent"</strong> and choose project or user level
+                      </li>
+                      <li className="leading-relaxed">
+                        <strong>Generate initial template</strong> with Claude, then press "e" to edit in your editor
+                      </li>
+                      <li className="leading-relaxed">
+                        <strong>Copy the full prompt</strong> from above and replace the generated content
+                      </li>
+                      <li className="leading-relaxed">
+                        <strong>Save and use</strong> - Your agent is ready! Claude will use it automatically or you can invoke explicitly
+                      </li>
                     </ol>
+                    <div className="mt-4 p-3 bg-purple-50 border border-purple-200 rounded-lg">
+                      <p className="text-xs text-purple-700">
+                        <strong>Pro Tip:</strong> Include "use PROACTIVELY" in the description field for automatic delegation
+                      </p>
+                    </div>
                   </div>
                 </details>
 
@@ -324,6 +340,20 @@ tools: [${agent.tools.join(', ')}]
                         </li>
                       ))}
                     </ul>
+                    <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                      <p className="text-xs text-blue-700">
+                        <strong>Note:</strong> You can view all available tools and their descriptions in the{' '}
+                        <a 
+                          href="https://docs.anthropic.com/en/docs/claude-code/sub-agents#available-tools"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline hover:text-blue-900 font-semibold"
+                        >
+                          Claude Code documentation
+                        </a>
+                        . If tools are omitted in the frontmatter, the subagent inherits all available tools.
+                      </p>
+                    </div>
                   </div>
                 </details>
               </div>
