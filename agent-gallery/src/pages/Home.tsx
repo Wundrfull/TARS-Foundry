@@ -309,7 +309,7 @@ ${agent.prompt}`;
                   
                   {/* Rotating gear */}
                   <g transform="translate(30, 30)">
-                    <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="4s" repeatCount="indefinite" additive="sum"/>
+                    <animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" dur="4s" repeatCount="indefinite" additive="sum"/>
                     <circle cx="0" cy="0" r="8" fill="none" stroke="#ffd700" strokeWidth="2"/>
                     <rect x="-2" y="-8" width="4" height="16" fill="#ffd700"/>
                     <rect x="-8" y="-2" width="16" height="4" fill="#ffd700"/>
@@ -594,7 +594,7 @@ ${agent.prompt}`;
                       
                       {/* Enhanced featured card content */}
                       {isFeatured && (
-                        <div className="mt-4 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-100">
+                        <div className="mt-4 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-100 hidden lg:block">
                           <h4 className="font-semibold text-sm text-gray-900 mb-2">Why this agent?</h4>
                           <ul className="space-y-1 text-sm text-gray-700">
                             <li className="flex items-start gap-2">
