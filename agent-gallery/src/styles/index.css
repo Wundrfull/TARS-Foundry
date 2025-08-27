@@ -32,7 +32,7 @@
   
   body {
     @apply font-sans text-gray-900 min-h-screen;
-    background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+    background: #f8f9fa;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     font-feature-settings: "cv11", "ss01";
     -webkit-font-smoothing: antialiased;
@@ -93,29 +93,22 @@
   /* Better Bento Cards with proper contrast */
   .bento-card {
     @apply relative overflow-hidden rounded-xl p-5 md:p-6 transition-all duration-300 cursor-pointer;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: var(--shadow-md);
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.06);
   }
 
   .bento-card:hover {
-    transform: translateY(-4px) scale(1.01);
-    box-shadow: var(--shadow-xl);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: #cbd5e0;
   }
 
   .bento-card-featured {
     @apply md:col-span-2 lg:row-span-2;
-    background: linear-gradient(135deg, #4c1d95 0%, #5b21b6 100%);
+    background: #ffffff;
+    border: 2px solid #e9d5ff;
     position: relative;
-  }
-
-  .bento-card-featured::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 1;
   }
 
   .bento-card-featured > * {
@@ -243,7 +236,8 @@
 
   /* Improved gradients orbs with less intensity */
   .gradient-orb {
-    @apply absolute rounded-full opacity-20 blur-3xl animate-pulse;
+    @apply absolute rounded-full opacity-5 blur-3xl;
+    animation: float 20s ease-in-out infinite;
   }
 
   .gradient-orb-1 {
