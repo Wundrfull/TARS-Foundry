@@ -4,9 +4,10 @@ import { Agent } from '../types/agent';
 interface HomeProps {
   agents: Agent[];
   onViewDetails: (agent: Agent) => void;
+  onNavigate: (page: 'home' | 'getting-started') => void;
 }
 
-export const Home: React.FC<HomeProps> = ({ agents, onViewDetails }) => {
+export const Home: React.FC<HomeProps> = ({ agents, onViewDetails, onNavigate }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedDomain, setSelectedDomain] = useState<string>('all');
@@ -74,16 +75,12 @@ ${agent.prompt}`;
   // Get domain style class
   const getDomainClass = (domain: string) => {
     const domainClasses: Record<string, string> = {
-      coding: 'domain-coding',
-      security: 'domain-security',
-      testing: 'domain-testing',
-      documentation: 'domain-documentation',
-      architecture: 'domain-architecture',
-      optimization: 'domain-optimization',
-      compliance: 'domain-security',
-      planning: 'domain-architecture',
-      troubleshooting: 'domain-optimization',
-      communication: 'domain-documentation',
+      Development: 'domain-development',
+      Security: 'domain-security',
+      Quality: 'domain-quality',
+      Architecture: 'domain-architecture',
+      Operations: 'domain-operations',
+      Documentation: 'domain-documentation',
     };
     return domainClasses[domain] || 'domain-default';
   };
@@ -120,6 +117,15 @@ ${agent.prompt}`;
           </div>
           
           <div className="flex items-center gap-3">
+            <button
+              onClick={() => onNavigate('getting-started')}
+              className="px-4 py-2 rounded-lg bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold hover:from-green-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg flex items-center gap-2"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              Getting Started
+            </button>
             <div className="relative">
               <input
                 type="search"
@@ -515,7 +521,7 @@ ${agent.prompt}`;
         </div>
       </section>
 
-      {/* Main Content - Improved Bento Grid */}
+      {/* Main Content - Table Layout with Featured Cards */}
       <section className="px-4 md:px-6 pb-20 relative z-10">
         <div className="max-w-7xl mx-auto">
           {filteredAgents.length === 0 ? (
@@ -532,162 +538,184 @@ ${agent.prompt}`;
               </button>
             </div>
           ) : (
-            <div className="bento-grid">
-              {filteredAgents.map((agent, index) => {
-                const isFeatured = index === 0;
-                const isWide = index === 3 || index === 5;
-                const isTall = index === 2;
-                
-                return (
-                  <div
-                    key={agent.id}
-                    className={`
-                      bento-card group card-content
-                      ${isFeatured ? 'bento-card-featured' : ''}
-                      ${isWide ? 'bento-card-wide' : ''}
-                      ${isTall ? 'bento-card-tall' : ''}
-                    `}
-                    style={{
-                      animationDelay: `${Math.min(index * 0.05, 0.5)}s`,
-                      animation: 'fadeInUp 0.6s ease-out forwards',
-                      opacity: 0
-                    }}
-                    onClick={() => onViewDetails(agent)}
-                    role="article"
-                    tabIndex={0}
-                    onKeyPress={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        onViewDetails(agent);
-                      }
-                    }}
-                  >
-                    {/* Card Header */}
-                    <div className="card-header">
-                      {isFeatured && (
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-purple-600 to-pink-600 text-white mb-3">
-                          <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.958a1 1 0 00.95.69h4.161c.969 0 1.371 1.24.588 1.81l-3.366 2.446a1 1 0 00-.364 1.118l1.286 3.958c.3.921-.755 1.688-1.54 1.118l-3.366-2.446a1 1 0 00-1.175 0l-3.366 2.446c-.784.57-1.838-.197-1.539-1.118l1.286-3.958a1 1 0 00-.364-1.118L2.016 9.385c-.783-.57-.38-1.81.588-1.81h4.161a1 1 0 00.95-.69l1.286-3.958z"/>
-                          </svg>
-                          FEATURED AGENT
-                        </span>
-                      )}
-                      <h3 className={`text-xl md:text-2xl font-bold mb-2 text-gray-900`}>
-                        {agent.title}
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
+            <div className="flex gap-6">
+              {/* Featured Cards Sidebar */}
+              <div className="hidden lg:block w-80 flex-shrink-0">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Featured Agents</h3>
+                <div className="space-y-4">
+                  {filteredAgents.slice(0, 2).map((agent, index) => (
+                    <div
+                      key={agent.id}
+                      className="featured-card group cursor-pointer"
+                      onClick={() => onViewDetails(agent)}
+                      style={{
+                        animationDelay: `${index * 0.1}s`,
+                        animation: 'fadeInUp 0.6s ease-out forwards',
+                        opacity: 0
+                      }}
+                    >
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold bg-gradient-to-r from-purple-600 to-pink-600 text-white mb-3">
+                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.958a1 1 0 00.95.69h4.161c.969 0 1.371 1.24.588 1.81l-3.366 2.446a1 1 0 00-.364 1.118l1.286 3.958c.3.921-.755 1.688-1.54 1.118l-3.366-2.446a1 1 0 00-1.175 0l-3.366 2.446c-.784.57-1.838-.197-1.539-1.118l1.286-3.958a1 1 0 00-.364-1.118L2.016 9.385c-.783-.57-.38-1.81.588-1.81h4.161a1 1 0 00.95-.69l1.286-3.958z"/>
+                        </svg>
+                        FEATURED
+                      </span>
+                      <h4 className="text-xl font-bold text-gray-900 mb-2">{agent.title}</h4>
+                      <p className="text-sm text-gray-600 mb-3">{agent.summary}</p>
+                      <div className="flex flex-wrap gap-1.5 mb-4">
                         {agent.domain.map((domain) => (
                           <span
                             key={domain}
-                            className={`${getDomainClass(domain)} domain-pill`}
+                            className={`${getDomainClass(domain)} domain-pill text-xs`}
                           >
                             {domain}
                           </span>
                         ))}
                       </div>
-                    </div>
-
-                    {/* Card Body */}
-                    <div className="card-body">
-                      <p className={`text-sm md:text-base text-gray-600 ${isTall || isFeatured ? '' : 'line-clamp-2'}`}>
-                        {agent.summary}
-                      </p>
-                      
-                      {/* Enhanced featured card content */}
-                      {isFeatured && (
-                        <div className="mt-4 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-100 hidden lg:block">
-                          <h4 className="font-semibold text-sm text-gray-900 mb-2">Why this agent?</h4>
-                          <ul className="space-y-1 text-sm text-gray-700">
-                            <li className="flex items-start gap-2">
-                              <svg className="w-4 h-4 text-purple-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                              </svg>
-                              <span>Most comprehensive security analysis</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                              <svg className="w-4 h-4 text-purple-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                              </svg>
-                              <span>OWASP Top 10 compliance checks</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                              <svg className="w-4 h-4 text-purple-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                              </svg>
-                              <span>Performance & maintainability insights</span>
-                            </li>
-                          </ul>
-                        </div>
-                      )}
-                      
-                      {/* Tags with proper styling */}
-                      <div className="flex flex-wrap gap-2 mt-4">
-                        {agent.tags.slice(0, isFeatured || isTall ? 5 : 3).map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700 border border-gray-200"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                        {agent.tags.length > (isFeatured || isTall ? 5 : 3) && (
-                          <span className="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700 border border-gray-200">
-                            +{agent.tags.length - (isFeatured || isTall ? 5 : 3)} more
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Card Footer */}
-                    <div className="card-footer flex items-center justify-between border-gray-200">
-                      {/* Tools Display */}
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-medium text-gray-500">
-                          Tools:
-                        </span>
-                        <div className="flex gap-1">
-                          {agent.tools.map((tool) => (
-                            <span
-                              key={tool}
-                              className="tool-badge"
-                              title={tool}
-                            >
-                              {toolIcons[tool] || tool.charAt(0)}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      
-                      {/* Action Buttons */}
                       <div className="flex gap-2">
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
                             handleCopyPrompt(agent);
                           }}
-                          className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
+                          className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all flex-1 ${
                             copiedId === agent.id 
                               ? 'bg-green-500 text-white' 
                               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                           }`}
-                          aria-label={`Copy prompt for ${agent.title}`}
                         >
-                          {copiedId === agent.id ? '✓ Copied' : 'Copy'}
+                          {copiedId === agent.id ? (
+                            <>
+                              <svg className="w-4 h-4 mr-1 inline-block" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                              </svg>
+                              Copied
+                            </>
+                          ) : (
+                            <>
+                              <svg className="w-4 h-4 mr-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                              </svg>
+                              Copy Prompt
+                            </>
+                          )}
                         </button>
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
                             onViewDetails(agent);
                           }}
-                          className="px-3 py-1.5 rounded-md text-sm font-semibold transition-all bg-gradient-to-r from-purple-600 to-purple-700 text-white hover:from-purple-700 hover:to-purple-800"
-                          aria-label={`View details for ${agent.title}`}
+                          className="px-3 py-1.5 rounded-md text-xs font-semibold transition-all bg-gradient-to-r from-purple-600 to-purple-700 text-white hover:from-purple-700 hover:to-purple-800 flex-1"
                         >
                           View Details
                         </button>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  ))}
+                </div>
+              </div>
+
+              {/* Main Table */}
+              <div className="flex-1 overflow-x-auto">
+                <div className="glass-strong rounded-xl overflow-hidden">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-gray-200 bg-gray-50/50">
+                        <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Agent</th>
+                        <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Domain</th>
+                        <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider hidden md:table-cell">Tags</th>
+                        <th className="px-4 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      {filteredAgents.map((agent, index) => (
+                        <tr
+                          key={agent.id}
+                          className="hover:bg-purple-50/30 transition-colors cursor-pointer"
+                          onClick={() => onViewDetails(agent)}
+                          style={{
+                            animationDelay: `${Math.min(index * 0.03, 0.5)}s`,
+                            animation: 'fadeIn 0.6s ease-out forwards',
+                            opacity: 0
+                          }}
+                        >
+                          <td className="px-4 py-4">
+                            <div>
+                              <div className="text-base font-semibold text-gray-900">{agent.title}</div>
+                              <div className="text-sm text-gray-600 mt-1">{agent.summary}</div>
+                            </div>
+                          </td>
+                          <td className="px-4 py-4">
+                            <div className="flex flex-wrap gap-1">
+                              {agent.domain.map((domain) => (
+                                <span
+                                  key={domain}
+                                  className={`${getDomainClass(domain)} domain-pill text-xs`}
+                                >
+                                  {domain}
+                                </span>
+                              ))}
+                            </div>
+                          </td>
+                          <td className="px-4 py-4 hidden md:table-cell">
+                            <div className="flex flex-wrap gap-1">
+                              {agent.tags.slice(0, 3).map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                              {agent.tags.length > 3 && (
+                                <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200">
+                                  +{agent.tags.length - 3}
+                                </span>
+                              )}
+                            </div>
+                          </td>
+                          <td className="px-4 py-4">
+                            <div className="flex gap-2 justify-center">
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleCopyPrompt(agent);
+                                }}
+                                className={`p-2 rounded-md text-xs font-medium transition-all flex items-center justify-center ${
+                                  copiedId === agent.id 
+                                    ? 'bg-green-500 text-white' 
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                }`}
+                                aria-label={`Copy prompt for ${agent.title}`}
+                              >
+                                {copiedId === agent.id ? (
+                                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                  </svg>
+                                ) : (
+                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                  </svg>
+                                )}
+                              </button>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  onViewDetails(agent);
+                                }}
+                                className="px-3 py-1.5 rounded-md text-xs font-semibold transition-all bg-gradient-to-r from-purple-600 to-purple-700 text-white hover:from-purple-700 hover:to-purple-800"
+                                aria-label={`View details for ${agent.title}`}
+                              >
+                                View
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           )}
         </div>
@@ -711,7 +739,7 @@ ${agent.prompt}`;
             </summary>
             
             <div className="absolute bottom-full right-0 mb-3 p-4 glass-strong rounded-xl w-72 max-h-80 overflow-y-auto shadow-xl">
-              <h3 className="font-semibold mb-3 text-gray-900">Select Tags</h3>
+              <h3 className="font-semibold mb-3 text-gray-900">Filter by Tags</h3>
               <div className="space-y-2 max-h-60 overflow-y-auto">
                 {allTags.map((tag) => (
                   <label key={tag} className="flex items-center gap-3 p-2 rounded-lg hover:bg-purple-50 cursor-pointer transition-colors">

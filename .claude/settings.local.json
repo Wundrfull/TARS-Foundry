@@ -21,7 +21,9 @@
       "mcp__playwright__browser_console_messages",
       "WebSearch",
       "mcp__playwright__browser_hover",
-      "mcp__playwright__browser_navigate_back"
+      "mcp__playwright__browser_navigate_back",
+      "Bash(npm ls:*)",
+      "mcp__playwright__browser_wait_for"
     ],
     "deny": [],
     "ask": []
