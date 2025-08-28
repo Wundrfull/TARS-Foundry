@@ -28,7 +28,9 @@
       "Bash(python3:*)",
       "Bash(sed:*)",
       "Bash(grep:*)",
-      "mcp__playwright__browser_evaluate"
+      "mcp__playwright__browser_evaluate",
+      "Bash(npm ci:*)",
+      "Bash(npx tsc:*)"
     ],
     "deny": [],
     "ask": []
