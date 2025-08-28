@@ -7,7 +7,12 @@
       "Bash(npm run dev:*)",
       "WebFetch(domain:www.captechconsulting.com)",
       "Bash(jq:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(python3:*)",
+      "Read(//**)",
+      "Bash(node:*)",
+      "Bash(npm run build:*)",
+      "Bash(timeout 30s npm run dev)"
     ],
     "deny": [],
     "ask": []
