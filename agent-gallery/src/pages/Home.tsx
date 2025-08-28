@@ -596,7 +596,7 @@ ${agent.prompt}`;
                       <h4 className="text-xl font-bold text-gray-900 mb-2">{agent.title}</h4>
                       <p className="text-sm text-gray-600 mb-3">{agent.summary}</p>
                       <div className="flex flex-wrap gap-1.5 mb-4">
-                        {agent.domain.map((domain) => (
+                        {agent.domain.slice(0, 2).map((domain) => (
                           <span
                             key={domain}
                             className={`${getDomainClass(domain)} domain-pill text-xs`}
@@ -604,6 +604,11 @@ ${agent.prompt}`;
                             {domain}
                           </span>
                         ))}
+                        {agent.domain.length > 2 && (
+                          <span className="domain-pill bg-gray-100 text-gray-600 text-xs">
+                            +{agent.domain.length - 2}
+                          </span>
+                        )}
                       </div>
                       <div className="flex gap-2">
                         <button
@@ -680,7 +685,7 @@ ${agent.prompt}`;
                           </td>
                           <td className="px-4 py-4">
                             <div className="flex flex-wrap gap-1">
-                              {agent.domain.map((domain) => (
+                              {agent.domain.slice(0, 2).map((domain) => (
                                 <span
                                   key={domain}
                                   className={`${getDomainClass(domain)} domain-pill text-xs`}
@@ -688,6 +693,11 @@ ${agent.prompt}`;
                                   {domain}
                                 </span>
                               ))}
+                              {agent.domain.length > 2 && (
+                                <span className="domain-pill bg-gray-100 text-gray-600 text-xs">
+                                  +{agent.domain.length - 2}
+                                </span>
+                              )}
                             </div>
                           </td>
                           <td className="px-4 py-4 hidden md:table-cell">

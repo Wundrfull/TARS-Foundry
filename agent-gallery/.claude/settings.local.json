@@ -1,7 +1,18 @@
 {
   "permissions": {
     "allow": [
-      "WebSearch"
+      "WebSearch",
+      "Bash(cat:*)",
+      "Bash(node:*)",
+      "Bash(npm install:*)",
+      "Bash(for agent in content-marketer context-manager customer-success-manager knowledge-synthesizer legal-advisor market-researcher multi-agent-coordinator performance-monitor project-manager product-manager sales-engineer scrum-master search-specialist task-distributor trend-analyst ux-researcher)",
+      "Bash(do)",
+      "Bash(if grep -q \"\"\"id\"\": \"\"$agent\"\"\" src/data/agents.json)",
+      "Bash(then)",
+      "Bash(else)",
+      "Bash(fi)",
+      "Bash(done)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []
