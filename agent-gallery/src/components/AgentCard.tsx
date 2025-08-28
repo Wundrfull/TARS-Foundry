@@ -11,6 +11,12 @@ interface AgentCardProps {
 export const AgentCard: React.FC<AgentCardProps> = ({ agent, onViewDetails, onCopyPrompt }) => {
   const getDomainColor = (domain: string): string => {
     const colors: Record<string, string> = {
+      // CapTech Practice Areas
+      SI: 'bg-blue-600 text-white font-bold', // Systems Integration - Blue
+      MC: 'bg-green-600 text-white font-bold', // Management Consulting - Green
+      CX: 'bg-purple-600 text-white font-bold', // Customer Experience - Purple
+      DA: 'bg-orange-600 text-white font-bold', // Data & Analytics - Orange
+      // Original domain colors
       coding: 'bg-kg-button-primary text-white',
       security: 'bg-kg-accent-orange text-white',
       testing: 'bg-kg-accent-yellow text-kg-text-primary',
@@ -21,6 +27,17 @@ export const AgentCard: React.FC<AgentCardProps> = ({ agent, onViewDetails, onCo
       planning: 'bg-kg-accent-yellow text-kg-text-primary',
       troubleshooting: 'bg-kg-accent-purple text-white',
       communication: 'bg-kg-bg-tertiary text-kg-text-secondary',
+      Development: 'bg-gray-600 text-white',
+      'UI/UX': 'bg-indigo-600 text-white',
+      Business: 'bg-teal-600 text-white',
+      Analysis: 'bg-cyan-600 text-white',
+      Security: 'bg-red-600 text-white',
+      Operations: 'bg-yellow-600 text-white',
+      Documentation: 'bg-pink-600 text-white',
+      Content: 'bg-rose-600 text-white',
+      Backend: 'bg-slate-600 text-white',
+      Frontend: 'bg-violet-600 text-white',
+      Database: 'bg-amber-600 text-white',
     };
     return colors[domain] || 'bg-kg-bg-secondary text-kg-text-secondary';
   };

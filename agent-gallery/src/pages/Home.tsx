@@ -28,7 +28,27 @@ export const Home: React.FC<HomeProps> = ({ agents, onViewDetails, onNavigate })
   const allDomains = useMemo(() => {
     const domains = new Set<string>();
     agents.forEach(agent => agent.domain.forEach(d => domains.add(d)));
-    return Array.from(domains).sort();
+    
+    // Sort with CapTech practice areas first
+    const practiceAreas = ['SI', 'MC', 'CX', 'DA'];
+    const domainArray = Array.from(domains);
+    
+    return domainArray.sort((a, b) => {
+      const aIsPractice = practiceAreas.includes(a);
+      const bIsPractice = practiceAreas.includes(b);
+      
+      // If one is a practice area and the other isn't, practice area comes first
+      if (aIsPractice && !bIsPractice) return -1;
+      if (!aIsPractice && bIsPractice) return 1;
+      
+      // If both are practice areas, sort by the defined order
+      if (aIsPractice && bIsPractice) {
+        return practiceAreas.indexOf(a) - practiceAreas.indexOf(b);
+      }
+      
+      // Otherwise, sort alphabetically
+      return a.localeCompare(b);
+    });
   }, [agents]);
 
   // Filter agents based on search and filters
@@ -75,12 +95,25 @@ ${agent.prompt}`;
   // Get domain style class
   const getDomainClass = (domain: string) => {
     const domainClasses: Record<string, string> = {
+      // CapTech Practice Areas
+      SI: 'domain-si',  // Systems Integration
+      MC: 'domain-mc',  // Management Consulting
+      CX: 'domain-cx',  // Customer Experience
+      DA: 'domain-da',  // Data & Analytics
+      // Original domains
       Development: 'domain-development',
       Security: 'domain-security',
       Quality: 'domain-quality',
       Architecture: 'domain-architecture',
       Operations: 'domain-operations',
       Documentation: 'domain-documentation',
+      'UI/UX': 'domain-architecture',
+      Business: 'domain-quality',
+      Analysis: 'domain-documentation',
+      Content: 'domain-documentation',
+      Backend: 'domain-development',
+      Frontend: 'domain-development',
+      Database: 'domain-operations',
     };
     return domainClasses[domain] || 'domain-default';
   };
@@ -543,7 +576,7 @@ ${agent.prompt}`;
               <div className="hidden lg:block w-80 flex-shrink-0">
                 <h3 className="text-lg font-bold text-gray-900 mb-4">Featured Agents</h3>
                 <div className="space-y-4">
-                  {filteredAgents.slice(0, 2).map((agent, index) => (
+                  {filteredAgents.slice(0, 3).map((agent, index) => (
                     <div
                       key={agent.id}
                       className="featured-card group cursor-pointer"

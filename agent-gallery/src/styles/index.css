@@ -355,6 +355,28 @@
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-bold text-white;
   }
 
+  /* CapTech Practice Area Colors */
+  .domain-si {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); /* Systems Integration - Blue */
+    @apply font-extrabold uppercase tracking-wider;
+  }
+
+  .domain-mc {
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); /* Management Consulting - Green */
+    @apply font-extrabold uppercase tracking-wider;
+  }
+
+  .domain-cx {
+    background: linear-gradient(135deg, #9333ea 0%, #7e22ce 100%); /* Customer Experience - Purple */
+    @apply font-extrabold uppercase tracking-wider;
+  }
+
+  .domain-da {
+    background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%); /* Data & Analytics - Orange */
+    @apply font-extrabold uppercase tracking-wider;
+  }
+
+  /* Original Domain Colors */
   .domain-development {
     background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   }

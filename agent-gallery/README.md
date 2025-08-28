@@ -4,7 +4,7 @@ A beautiful, interactive gallery showcasing curated Claude sub-agent prompt temp
 
 ## 🚀 Features
 
-- **8 Specialized Agents**: From code review to documentation generation
+- **10 Specialized Agents**: From code review to fullstack development
 - **Smart Filtering**: Search and filter by tags, domains, and keywords
 - **Beautiful UI**: Modern glass-morphism design with HeroUI components
 - **Copy & Export**: One-click copy to clipboard or export as Markdown/JSON
@@ -23,6 +23,8 @@ A beautiful, interactive gallery showcasing curated Claude sub-agent prompt temp
 6. **Migration Planner** - Structured migration planning
 7. **Refactor Executor** - Disciplined refactoring specialist
 8. **Documentation Writer** - Documentation generation expert
+9. **Frontend Developer** - React 19+ and TypeScript specialist with modern web standards
+10. **Fullstack Developer** - T3 stack expert with end-to-end type-safe development
 
 ## 🛠️ Installation
 

@@ -60,6 +60,12 @@ tools: [${agent.tools.join(', ')}]
   // Get domain style class (same as Home component)
   const getDomainClass = (domain: string) => {
     const domainClasses: Record<string, string> = {
+      // CapTech Practice Areas
+      SI: 'domain-si',  // Systems Integration
+      MC: 'domain-mc',  // Management Consulting
+      CX: 'domain-cx',  // Customer Experience
+      DA: 'domain-da',  // Data & Analytics
+      // Original domain mappings
       coding: 'domain-coding',
       security: 'domain-security',
       testing: 'domain-testing',
@@ -70,6 +76,17 @@ tools: [${agent.tools.join(', ')}]
       planning: 'domain-architecture',
       troubleshooting: 'domain-optimization',
       communication: 'domain-documentation',
+      Development: 'domain-development',
+      'UI/UX': 'domain-architecture',
+      Business: 'domain-quality',
+      Analysis: 'domain-documentation',
+      Security: 'domain-security',
+      Operations: 'domain-operations',
+      Documentation: 'domain-documentation',
+      Content: 'domain-documentation',
+      Backend: 'domain-development',
+      Frontend: 'domain-development',
+      Database: 'domain-operations',
     };
     return domainClasses[domain] || 'domain-default';
   };
